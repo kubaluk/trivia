@@ -43,21 +43,20 @@ function App() {
 
   function handleAnswerChange(questionId, isCorrect){
     setQuestions(prevQuestions=>prevQuestions.map(question=>question.id===questionId ?
-      {...question, correctSelected: isCorrect} :
+      {...question, correctSelected: isCorrect} : 
       question))
-      console.log(questions)
   }
 
   function endQuiz(){
-    setQuizEnded(true)
     let finalScore = 0
     //questions.forEach(question => question.correctSelected && finalScore++)
     for(let i=0; i<questions.length; i++){
       if(questions[i].correctSelected)
-        finalScore++
+      finalScore++
     }
     setScore(finalScore)
     //console.log(score)
+    setQuizEnded(true)
   }
 
 

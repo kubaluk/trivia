@@ -3,10 +3,19 @@ import './Question.css'
 import Answer from '../Answer/Answer'
 import {nanoid} from 'nanoid'
 
-function Question({title, correct, incorrect}){
+function Question({id, title, correct, incorrect, onAnswerChange}){
 	const [answers, setAnswers] = useState([])
 
 	useEffect(()=>getAnswers(), [title])
+
+	useEffect(()=>{
+		if(answers.length>0){
+			const selectedAnswer = answers.find(answer => answer.isSelected === true)
+			if(selectedAnswer){
+				onAnswerChange(id, selectedAnswer.isCorrect)
+			}
+		}
+	}, [answers.find(answer=>answer.isSelected)])
 
 	function getAnswers(){
 		const newAnswers = []
@@ -15,6 +24,8 @@ function Question({title, correct, incorrect}){
 			newAnswers.push(createNewAnswer(incorrect[i], false))
 		}
 		const shuffledAnswers = shuffleAnswers(newAnswers)
+
+		//console.log(shuffledAnswers)
 
 		setAnswers(shuffledAnswers)
 	}
@@ -50,21 +61,21 @@ function Question({title, correct, incorrect}){
 
 	function selectAnswer(answerId){
 		setAnswers(prevAnswers => prevAnswers.map(
-				answer => answer.id === answerId ? 
-				{...answer, isSelected: !answer.isSelected} 
-				: 
-				answer.isSelected === true ? {...answer, isSelected: false} : answer
+			answer => answer.id === answerId ? 
+			{...answer, isSelected: !answer.isSelected} 
+			: 
+			answer.isSelected === true ? {...answer, isSelected: false} : answer
 		))
 	}
 	
 	function renderAnswers(){
 		const answersMapped = answers.map(answer => { return (
 			<Answer 
-					key={answer.id}
-					id={answer.id} 
-					text={answer.text} 
-					selectAnswer={selectAnswer} 
-					selected={answer.isSelected}
+				key={answer.id}
+				id={answer.id} 
+				text={answer.text} 
+				selectAnswer={selectAnswer} 
+				selected={answer.isSelected}
 			/>
 		)})
 		return answersMapped
