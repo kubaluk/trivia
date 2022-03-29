@@ -1,12 +1,12 @@
-import React from 'react'
+import {useState} from 'react'
 import './App.css';
 import Question from './Components/Question';
 import {nanoid} from 'nanoid'
 
 function App() {
-    const [questions, setQuestions] = React.useState([])
-    const [quizEnded, setQuizEnded] = React.useState(false)
-    const [score, setScore] = React.useState(0)
+    const [questions, setQuestions] = useState([])
+    const [quizEnded, setQuizEnded] = useState(false)
+    const [score, setScore] = useState(0)
 
      function getNewQuestions(){
        setQuizEnded(false)
@@ -69,16 +69,16 @@ function App() {
           </div>
           <div className='results'>
             {quizEnded && `Score: ${score}/${questions.length}`}
-            <button className='quiz--button' onClick={quizEnded ? getNewQuestions : endQuiz}>
+            <button className='quiz__button' onClick={quizEnded ? getNewQuestions : endQuiz}>
               {quizEnded ? "Start new quiz" : "Check answers"}
             </button>
           </div>
         </div>
     : 
-        <div className='startScreen'>
-            <h1 className='start--title'>Quizzical</h1>
-            <p className='start--description'>Answer 5 random trivia questions</p>
-            <button className='start--button' onClick={getNewQuestions}>
+        <div className='start'>
+            <h1 className='start__title'>Quizzical</h1>
+            <p className='start__description'>Answer 5 random trivia questions</p>
+            <button className='start__button' onClick={getNewQuestions}>
               Start quiz
             </button>
         </div>

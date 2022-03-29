@@ -7,7 +7,7 @@ function Answer({id, text, selectAnswer, selected}){
     }
     return (
         <div className='answer' onClick={() => selectAnswer(id)} style={selected ? selectedStyle : null}>
-            <p className='answer--text'>
+            <p className='answer__paragraph'>
                 {text}
             </p>
         </div>

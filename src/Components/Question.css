@@ -2,7 +2,7 @@
   max-width: 100%;
 }
 
-.question--title {
+.question__title {
   font-family: "Karla", sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -21,11 +21,11 @@
   gap: 2% 1em;
 }
 
-.answers > * {
+.question__answers > * {
   margin: 0.5em 0;
 }
 
-.question--separator {
+.question__separator {
   margin: 1.5em 0;
   border: 1px solid #dbdef0;
 }

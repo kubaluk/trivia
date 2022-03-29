@@ -1,12 +1,12 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import './Question.css';
 import Answer from './Answer'
 import {nanoid} from 'nanoid'
 
 function Question({title, correct, incorrect}){
-    const [answers, setAnswers] = React.useState([])
+    const [answers, setAnswers] = useState([])
 
-    React.useEffect(()=>getAnswers(), [title])
+    useEffect(()=>getAnswers(), [title])
 
     function getAnswers(){
         const newAnswers = []
@@ -74,11 +74,11 @@ function Question({title, correct, incorrect}){
 
     return (
         <div className='question'>
-            <h2 className='question--title'>{title}</h2>
+            <h2 className='question__title'>{title}</h2>
             <div className='answers'>
                 {renderAnswers()}
             </div>
-            <hr className='question--separator'/>
+            <hr className='question__separator'/>
         </div>
     )
     
