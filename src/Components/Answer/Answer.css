@@ -1,0 +1,23 @@
+.answer {
+	min-width: 12%;
+	min-height: 2em;
+	border: 1px solid #4d5b9e;
+	box-sizing: border-box;
+	border-radius: 0.75em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: row wrap;
+	cursor: pointer;
+	user-select: none;
+}
+
+.answer__paragraph {
+	margin: 0;
+	padding: 0.25em 1em;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 1em;
+	text-align: center;
+	color: #293264;
+}
