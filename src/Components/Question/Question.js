@@ -3,7 +3,7 @@ import './Question.css'
 import Answer from '../Answer/Answer'
 import {nanoid} from 'nanoid'
 
-function Question({id, title, correct, incorrect, onAnswerChange}){
+function Question({id, title, correct, incorrect, onAnswerChange, quizEnded}){
 	const [answers, setAnswers] = useState([])
 
 	useEffect(()=>getAnswers(), [title])
@@ -76,6 +76,8 @@ function Question({id, title, correct, incorrect, onAnswerChange}){
 				text={answer.text} 
 				selectAnswer={selectAnswer} 
 				selected={answer.isSelected}
+				quizEnded={quizEnded}
+				isCorrect={answer.isCorrect}
 			/>
 		)})
 		return answersMapped

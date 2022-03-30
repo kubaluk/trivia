@@ -13,6 +13,26 @@ main {
 	justify-content: center;
 }
 
+.quiz__paragraph {
+	min-height: 1em;
+	margin-right: 3%;
+
+	font-family: 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.1em;
+}
+
+.quiz__paragraph--perfect {
+	margin: 4% auto;
+	text-align: center;
+
+	font-family: 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 3em;
+}
+
 .quiz__button {
 	min-height: 3.5em;
 	background: #4d5b9e;

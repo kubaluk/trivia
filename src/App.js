@@ -35,6 +35,7 @@ function App() {
           correct={quest.correct_answer}
           incorrect={quest.incorrect_answers}
           onAnswerChange={handleAnswerChange}
+          quizEnded={quizEnded}
         />
       )
     })
@@ -49,13 +50,11 @@ function App() {
 
   function endQuiz(){
     let finalScore = 0
-    //questions.forEach(question => question.correctSelected && finalScore++)
     for(let i=0; i<questions.length; i++){
       if(questions[i].correctSelected)
       finalScore++
     }
     setScore(finalScore)
-    //console.log(score)
     setQuizEnded(true)
   }
 
@@ -68,11 +67,12 @@ function App() {
             {renderQuestions()}
           </div>
           <div className='results'>
-            {quizEnded && `Score: ${score}/${questions.length}`}
+            <p className='quiz__paragraph'>{quizEnded && `Score: ${score}/${questions.length}`}</p>
             <button className='quiz__button' onClick={quizEnded ? getNewQuestions : endQuiz}>
               {quizEnded ? "Start new quiz" : "Check answers"}
             </button>
           </div>
+          <p className='quiz__paragraph--perfect'>{score===questions.length && `Congratulations!`}</p>
         </div>
       : 
         <div className='start'>
