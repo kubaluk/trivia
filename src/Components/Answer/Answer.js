@@ -14,8 +14,8 @@ function Answer({id, text, selectAnswer, selected, quizEnded, isCorrect}){
     color = selected? "#D6DBF5" : "#F5F5F5"
   } 
 
-  const border = selected || quizEnded && isCorrect ? "none" : "1px solid #4d5b9e"
-  const opacity = quizEnded ? isCorrect ? 1 : 0.5 : 1
+  const border = selected || (quizEnded && isCorrect) ? "none" : "1px solid #4d5b9e"
+  const opacity = quizEnded ? (isCorrect ? 1 : 0.5) : 1
   const cursor = quizEnded ? "auto" : "pointer"
 
   const style = {

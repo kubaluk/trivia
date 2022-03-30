@@ -1,23 +1,32 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './App.css'
 import Question from './Components/Question/Question'
 import {nanoid} from 'nanoid'
+import { decode } from 'html-entities'
 
 function App() {
+  const [apiData, setApiData] = useState([])
   const [questions, setQuestions] = useState([])
   const [quizEnded, setQuizEnded] = useState(false)
   const [score, setScore] = useState(0)
 
+  useEffect(() => {
+    fetch('https://opentdb.com/api.php?amount=5')
+      .then(res => res.json())
+      .then(data => {setApiData(data.results)})
+  }, [quizEnded])
+
   function getNewQuestions(){
     setQuizEnded(false)
     setScore(0)
+
     const newQuestions = []
-    for(let i=1; i<6; i++){
+    for(let i=0; i<apiData.length; i++){
       const newQuestion = {
         id: nanoid(),
-        question: `test question ${i}`,
-        correct_answer: `correct`,
-        incorrect_answers: [`first`, `second`, `third`],
+        question: decode(apiData[i].question),
+        correct_answer: apiData[i].correct_answer,
+        incorrect_answers: apiData[i].incorrect_answers,
         correctSelected: false
       }
       newQuestions.push(newQuestion)

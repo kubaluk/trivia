@@ -1,12 +1,13 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import './Question.css'
 import Answer from '../Answer/Answer'
-import {nanoid} from 'nanoid'
+import { nanoid } from 'nanoid'
+import { decode } from 'html-entities'
 
 function Question({id, title, correct, incorrect, onAnswerChange, quizEnded}){
 	const [answers, setAnswers] = useState([])
 
-	useEffect(()=>getAnswers(), [title])
+	useEffect(()=>getAnswers(), [])
 
 	useEffect(()=>{
 		if(answers.length>0){
@@ -20,12 +21,10 @@ function Question({id, title, correct, incorrect, onAnswerChange, quizEnded}){
 	function getAnswers(){
 		const newAnswers = []
 		newAnswers.push(createNewAnswer(correct, true))
-		for(let i=0; i<3; i++){
+		for(let i=0; i<incorrect.length; i++){
 			newAnswers.push(createNewAnswer(incorrect[i], false))
 		}
 		const shuffledAnswers = shuffleAnswers(newAnswers)
-
-		//console.log(shuffledAnswers)
 
 		setAnswers(shuffledAnswers)
 	}
@@ -34,7 +33,7 @@ function Question({id, title, correct, incorrect, onAnswerChange, quizEnded}){
 		let currentIndex = array.length,  randomIndex;
 	
 		// While there remain elements to shuffle...
-		while (currentIndex != 0) {
+		while (currentIndex !== 0) {
 	
 			// Pick a remaining element...
 			randomIndex = Math.floor(Math.random() * currentIndex);
@@ -52,7 +51,7 @@ function Question({id, title, correct, incorrect, onAnswerChange, quizEnded}){
 	function createNewAnswer(answer, isCorrect){
 		const newAnswer = {
 			id: nanoid(),
-			text: answer,
+			text: decode(answer),
 			isCorrect: isCorrect,
 			isSelected: false
 		}
@@ -69,17 +68,19 @@ function Question({id, title, correct, incorrect, onAnswerChange, quizEnded}){
 	}
 	
 	function renderAnswers(){
-		const answersMapped = answers.map(answer => { return (
-			<Answer 
-				key={answer.id}
-				id={answer.id} 
-				text={answer.text} 
-				selectAnswer={selectAnswer} 
-				selected={answer.isSelected}
-				quizEnded={quizEnded}
-				isCorrect={answer.isCorrect}
-			/>
-		)})
+		const answersMapped = answers.map(answer => { 
+			return (
+				<Answer 
+					key={answer.id}
+					id={answer.id} 
+					text={answer.text} 
+					selectAnswer={selectAnswer} 
+					selected={answer.isSelected}
+					quizEnded={quizEnded}
+					isCorrect={answer.isCorrect}
+				/>
+			)
+		})
 		return answersMapped
 	}
 
