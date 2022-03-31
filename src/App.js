@@ -1,7 +1,7 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Question from './Components/Question/Question'
-import {nanoid} from 'nanoid'
+import { nanoid } from 'nanoid'
 import { decode } from 'html-entities'
 
 function App() {
@@ -52,9 +52,14 @@ function App() {
   }
 
   function handleAnswerChange(questionId, isCorrect){
-    setQuestions(prevQuestions=>prevQuestions.map(question=>question.id===questionId ?
-      {...question, correctSelected: isCorrect} : 
-      question))
+    setQuestions(prevQuestions=>prevQuestions.map(question=>question.id===questionId ? 
+      {
+        ...question, 
+        correctSelected: isCorrect
+      } 
+      : 
+      question
+    ))
   }
 
   function endQuiz(){
@@ -67,7 +72,6 @@ function App() {
     setQuizEnded(true)
   }
 
-
   return (
     <main>
       {questions.length > 0 ? 
@@ -78,7 +82,7 @@ function App() {
           <div className='results'>
             <p className='quiz__paragraph'>{quizEnded && `Score: ${score}/${questions.length}`}</p>
             <button className='quiz__button' onClick={quizEnded ? getNewQuestions : endQuiz}>
-              {quizEnded ? "Start new quiz" : "Check answers"}
+              {quizEnded ? 'Start new quiz' : 'Check answers'}
             </button>
           </div>
           <p className='quiz__paragraph--perfect'>{score===questions.length && `Congratulations!`}</p>
